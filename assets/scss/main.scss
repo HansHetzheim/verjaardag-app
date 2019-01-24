@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  background-color: rgb(11, 11, 11);
+  font-family: aleo;
+
+  .video-container {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // overflow: hidden;
+    #backgroundVideo {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      // min-width: 80%;
+      // min-height: 80%;
+      // width: 80%;
+      // height: 65%;
+      z-index: -1;
+      overflow: hidden;
+      // border-radius: 50%;
+    }
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+
+    h1 {
+      font-size: 45px;
+      margin-top: 30px;
+      text-align: center;
+      color: rgb(200, 163, 61);
+    }
+
+    h2 {
+      font-size: 25px;
+      margin-top: 20px;
+      text-align: center;
+      color: rgb(200, 163, 61);
+    }
+
+    .splitscreen {
+      display: grid;
+      grid-template-columns: 1px auto;
+      // grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      img {
+        display: block;
+        margin-top: 33px;
+      }
+
+      .fields {
+        display: grid;
+        justify-content: center;
+
+        h3 {
+          font-size: 20px;
+          margin-top: 5px;
+          margin-bottom: 10px;
+          color: rgb(200, 163, 61);
+          text-align: center;
+        }
+
+        .song1,
+        .song2,
+        .song3 {
+          margin: auto;
+          width: 180px;
+          font-weight: bold;
+          color: rgb(30, 33, 102);
+          background-color: rgb(187, 196, 200);
+          opacity: 0.5;
+        }
+
+        .message {
+          width: 300px;
+          height: 100px;
+          margin: auto;
+          font-weight: bold;
+          color: rgb(30, 33, 102);
+          background-color: rgb(187, 196, 200);
+          opacity: 0.5;
+        }
+
+        button {
+          background-color: rgb(30, 33, 102);
+          color: white;
+          font-weight: bold;
+          width: 100px;
+          height: 30px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .buttons {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}
