@@ -1,42 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Big Test</title>
-  </head>
-  <body>
-
-    <form id='register' action='test.php' method='post' accept-charset='UTF-8'>
-      <fieldset >
-      <legend>Register</legend>
-      <label for='username' >Your UserName*:</label>
-      <input type='text' name='username' id='username' maxlength="50" />
-      <label for='email' >Your Email Address*:</label>
-      <input type='text' name='email' id='email' maxlength="50" />
-
-      <label for='artist1' >Artist (1)*:</label>
-      <input type='text' name='artist1' id='artist1' maxlength="50" />
-      <label for='songName1' >Song Name*:</label>
-      <input type='text' name='songName1' id='songName1' maxlength="50" />
-
-      <label for='artist2' >Artist (2)*:</label>
-      <input type='text' name='artist2' id='artist2' maxlength="50" />
-      <label for='songName2' >Song Name (2)*:</label>
-      <input type='text' name='songName2' id='songName2' maxlength="50" />
-
-      <label for='artist3' >Artist (3)*:</label>
-      <input type='text' name='artist3' id='artist3' maxlength="50" />
-      <label for='songName' >Song Name (3)*:</label>
-      <input type='text' name='songName3' id='songName3' maxlength="50" />
-
-      <input type='submit' name='Submit' value='Submit' />
-
-      </fieldset>
-    </form>
-
-  </body>
-</html>
-
 <?php
 $servername = "localhost";
 $username = "tom";
@@ -49,6 +10,7 @@ $update = False;
 
 $name = $_POST['username'];
 $mail = $_POST['email'];
+
 $artist1 = $_POST['artist1'];
 $songName1 = $_POST['songName1'];
 $artist2 = $_POST['artist2'];
@@ -67,7 +29,7 @@ echo "mail check 2<br>";
 // Create connection------------------------------------------------------------
 $conn = new mysqli($servername, $username, $password);
 
-// Check connection
+// Check connection-------------------------------------------------------------
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
@@ -152,17 +114,17 @@ echo "Connected successfully to database " . $dbname . "<br>";
 // // $stmt->close();
 
 //find data in database and show results----------------------------------------
-// $sql = "SELECT * FROM $tableName";
-// $result = $conn->query($sql);
-//
-// if ($result->num_rows > 0) {
-//     // output data of each row
-//     while($row = $result->fetch_assoc()) {
-//        echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["reg_date"]. "<br>";
-//     }
-// } else {
-//     echo "0 results";
-// }
+$sql = "SELECT * FROM $tableName";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+       echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["reg_date"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
 //
 //Delete a record---------------------------------------------------------------
 // $sql = "DELETE FROM $tableName WHERE id=16";
@@ -181,11 +143,11 @@ echo "Connected successfully to database " . $dbname . "<br>";
 //     echo "Error updating record: " . $conn->error;
 // }
 
-//check of een ingevoerde email al in de database staat-------------------------
-// $sql = "SELECT id FROM $tableName WHERE email = '$mail'";
-// $result = $conn->query($sql);
-// print_r($result->num_rows);
-// echo "<br>";
+//Check of een ingevoerde email al in de database staat-------------------------
+$sql = "SELECT id FROM $tableName WHERE email = '$mail'";
+$result = $conn->query($sql);
+print_r($result->num_rows);
+echo "<br>";
 
 //update record/row-------------------------------------------------------------
 
@@ -228,8 +190,15 @@ if ($matches1 != NULL && $matches2[0] === NULL){
 } else {
   echo "Invalid e-mail.<br>";
 }
+//
+// $to = "tom.goyens@gmail.com";
+// $subject = "My subject";
+// $txt = "Hello world!";
+// $headers = "From: webmaster@example.com" . "\r\n";
+//
+// mail($to,$subject,$txt,$headers);
 
-
+// phpinfo();
 
 //Remove database-----------------------------------------------------------
 // $sql = "DROP DATABASE $dbname";
@@ -242,3 +211,43 @@ if ($matches1 != NULL && $matches2[0] === NULL){
 //Close the connection to mysql database----------------------------------------
 $conn->close();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Big Test</title>
+  </head>
+  <body>
+
+    <form id='register' action='test.php' method='post' accept-charset='UTF-8'>
+      <fieldset >
+      <legend>Your playlist</legend>
+      <label for='username' >Your UserName*:</label>
+      <input type='text' name='username' id='username' maxlength="50" disabled/>
+      <label for='email' >Your Email Address*:</label>
+      <input type='text' name='email' id='email' maxlength="50" disabled/>
+
+      <label for='artist1' >Artist (1)*:</label>
+      <input type='text' name='artist1' id='artist1' maxlength="50" />
+      <label for='songName1' >Song Name*:</label>
+      <input type='text' name='songName1' id='songName1' maxlength="50" />
+
+      <label for='artist2' >Artist (2)*:</label>
+      <input type='text' name='artist2' id='artist2' maxlength="50" />
+      <label for='songName2' >Song Name (2)*:</label>
+      <input type='text' name='songName2' id='songName2' maxlength="50" />
+
+      <label for='artist3' >Artist (3)*:</label>
+      <input type='text' name='artist3' id='artist3' maxlength="50" />
+      <label for='songName' >Song Name (3)*:</label>
+      <input type='text' name='songName3' id='songName3' maxlength="50" />
+
+      <input type='submit' name='Submit' value='Submit' />
+
+      </fieldset>
+    </form>
+
+  </body>
+</html>
