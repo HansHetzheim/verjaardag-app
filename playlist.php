@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "tom";
-$password = "DaRuler07";
+$username = "veryCoolUser";
+$password = "unGuessable1010";
 $dbname = "dirkParty";
 $tableName = "guestPlaylist";
 $mailPattern = '/^[\w][\w.]+[\w]@[\w.]+\.[\w]{2,4}$/i';
