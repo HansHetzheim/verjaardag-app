@@ -42,9 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form id='register' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Login</legend>
-      <label for='username' >Your UserName*:</label>
+      <label for='username' >Jouw Username*:</label>
       <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name ?>"/>
-      <label for='email' >Your Email Address*:</label>
+      <label for='email' >Jouw Email Adres*:</label>
       <input type='text' name='email' id='email' maxlength="50" value="<?php echo $email ?>"/><span><?php echo $emailErr ?></span>
 
       <input type='submit' name='Submit' value='Submit' />
