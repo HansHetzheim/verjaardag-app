@@ -6,7 +6,6 @@ $dbname = "dirkParty";
 $tableName = "guestPlaylist";
 $mailPattern = '/^[\w][\w.]+[\w]@[\w.]+\.[\w]{2,4}$/i';
 $doubleDot = "/\.{2,}/";
-$update = False;
 
 $name = $_POST['username'];
 $mail = $_POST['email'];
@@ -31,57 +30,91 @@ echo "Connected successfully to database " . $dbname . "<br>";
 
 //check of email al bestaat
 $sql = "SELECT * FROM $tableName WHERE email = '$mail'";
-
 $result = $conn->query($sql);
+//check
+echo "email check: ";
 print_r($result);
-
+echo "<br>";
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-       echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["reg_date"]. "<br>";
+       echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["reg_date"]. $row["artist1"]. "<br>";
     }
 } else {
     echo "0 results";
 }
 
 // check of een ingevoerde email al in de database staat------------------------
-if ($result->num_rows > 0) {
-  $sql2 = "SELECT * FROM $tableName WHERE email = '$mail'";
-  $result = $conn->query($sql2);
-  if ($result->num_rows > 0) {
-      // put the record in vars
-      while($row = $result->fetch_assoc()) {
-         $artist1 = $row["artist1"];
-         $songName1 = $row["songTitle1"];
-         $artist2 = $row["artist2"];
-         $songName2 = $row["songTitle2"];
-         $artist3 = $row["artist3"];
-         $songName3 = $row["songTitle3"];
-         $update = True;
-      }
-  } else {
-      echo "0 results";
+if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de data indien nodig
+  //als playlist.php in gePOST moet een update worden uitgevoerd
+  if ($_POST['artist1'] != NUll) {
+    //update record/row-----------------------------------------------------------
+    echo "Email exists.<br>";
+    $artist1 = $_POST['artist1'];
+    $songName1 = $_POST['songName1'];
+    $artist2 = $_POST['artist2'];
+    $songName2 = $_POST['songName2'];
+    $artist3 = $_POST['artist3'];
+    $songName3 = $_POST['songName3'];
+    $sql2 = "UPDATE $tableName
+    SET artist1='$artist1',
+    songTitle1='$songName1',
+    artist2='$artist2',
+    songTitle2='$songName2',
+    artist3='$artist3',
+    songTitle3='$songName3'
+    WHERE email='$mail'";
+
+    if ($conn->query($sql2) === TRUE) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error upadting record: " . $conn->error;
+    }
+  } else { //als login.php gePOST was moet enkel de vorige info opgehaald worden
+    // put the record in vars
+    echo "update check: ";
+    print_r($result);
+    echo "<br>";
+    $sql = "SELECT * FROM $tableName WHERE email = '$mail'";//dit moet nog eens gebeuren, IK HEB GEEN IDEE WAAROM print_r($result); GEEFT HETZELFDE
+    $result = $conn->query($sql);
+    echo "update check: ";
+    print_r($result);
+    echo "<br>";
+    while($row = $result->fetch_assoc()) {
+      echo "hallo? <br>";
+       $artist1 = $row["artist1"];
+       echo $row["artist1"];
+       $songName1 = $row["songTitle1"];
+       $artist2 = $row["artist2"];
+       $songName2 = $row["songTitle2"];
+       $artist3 = $row["artist3"];
+       $songName3 = $row["songTitle3"];
+     }
   }
-} else {
+ } else { //zo niet(er is een nieuw email in login.php gepost): initialiseer de data in mysql (maak een record)
   $artist1 = "";
   $songName1 = "";
   $artist2 = "";
   $songName2 = "";
   $artist3 = "";
   $songName3 = "";
-  // Add row----------------------------------------------------------------------
-
-  $sql2 = "INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3)
+  // Add row------------------------------------------------------------------
+  $sql = "INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3)
   VALUES ('$name', '$mail', '$artist1', '$songName1', '$artist2', '$songName2', '$artist3', '$songName3')";
 
-  if ($conn->query($sql2) === TRUE) {
+  if ($conn->query($sql) === TRUE) {
       $last_id = $conn->insert_id;
       echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
   } else {
       echo "Error creating row: " . $conn->error;
-    }
+  }
+}
 
-
+function test_input($data) {
+$data = trim($data);
+$data = stripslashes($data);
+$data = htmlspecialchars($data);
+return $data;
 }
 
 $conn->close();
@@ -95,13 +128,13 @@ $conn->close();
   </head>
   <body>
 
-    <form id='register' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method='post' accept-charset='UTF-8'>
+    <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Your playlist</legend>
       <label for='username' >Your UserName*:</label>
-      <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name; ?>" disabled/>
+      <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name; ?>" readonly="readonly"/>
       <label for='email' >Your Email Address*:</label>
-      <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" disabled/>
+      <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" readonly="readonly"/>
 
       <label for='artist1' >Artist (1)*:</label>
       <input type='text' name='artist1' id='artist1' maxlength="50" value="<?php echo $artist1; ?>"/>

@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 $name = $email = $nameErr = $emailErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["username"])) {
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $data = htmlspecialchars($data);
   return $data;
 }
-?>
+?> -->
 
 
 <!DOCTYPE html>
@@ -39,13 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </head>
   <body>
 
-    <form id='register' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method='post' accept-charset='UTF-8'>
+    <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Login</legend>
       <label for='username' >Your UserName*:</label>
       <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name ?>"/>
       <label for='email' >Your Email Address*:</label>
-      <input type='text' name='email' id='email' maxlength="50" value="<?php echo $email ?>"/><span><?php echo $emailErr ?></span>
+      <input type='email' name='email' id='email' maxlength="50" value="<?php echo $email ?>"/><span><?php echo $emailErr ?></span>
 
       <input type='submit' name='Submit' value='Submit' />
 
