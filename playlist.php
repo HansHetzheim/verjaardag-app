@@ -1,15 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "veryCoolUser";
-$password = "unGuessable1010";
-$dbname = "dirkParty";
-$tableName = "guestPlaylist";
-$mailPattern = '/^[\w][\w.]+[\w]@[\w.]+\.[\w]{2,4}$/i';
-$doubleDot = "/\.{2,}/";
+include 'config.php';
 
 $name = $_POST['username'];
 $mail = $_POST['email'];
-echo "naam: ".$name."<br> mail: ".$mail."<br>";
+// echo "naam: ".$name."<br> mail: ".$mail."<br>";
 
 // Create connection------------------------------------------------------------
 $conn = new mysqli($servername, $username, $password);
@@ -18,23 +12,23 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully<br>";
+// echo "Connected successfully<br>";
 
 //Connect to relevant database--------------------------------------------------
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection to database failed: " . $conn->connect_error);
 }
-echo "Connected successfully to database " . $dbname . "<br>";
+// echo "Connected successfully to database " . $dbname . "<br>";
 
 
 //check of email al bestaat
 $sql = "SELECT * FROM $tableName WHERE email = '$mail'";
 $result = $conn->query($sql);
 //check
-echo "email check: ";
-print_r($result);
-echo "<br>";
+// echo "email check: ";
+// print_r($result);
+// echo "<br>";
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -49,7 +43,7 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
   //als playlist.php in gePOST moet een update worden uitgevoerd
   if ($_POST['artist1'] != NUll) {
     //update record/row-----------------------------------------------------------
-    echo "Email exists.<br>";
+    // echo "Email exists.<br>";
     $artist1 = $_POST['artist1'];
     $songName1 = $_POST['songName1'];
     $artist2 = $_POST['artist2'];
@@ -66,24 +60,22 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
     WHERE email='$mail'";
 
     if ($conn->query($sql2) === TRUE) {
-        echo "Record updated successfully";
+        // echo "Record updated successfully";
     } else {
         echo "Error upadting record: " . $conn->error;
     }
   } else { //als login.php gePOST was moet enkel de vorige info opgehaald worden
-    // put the record in vars
-    echo "update check: ";
-    print_r($result);
-    echo "<br>";
+    // // put the record in vars
+    // echo "update check: ";
+    // print_r($result);
+    // echo "<br>";
     $sql = "SELECT * FROM $tableName WHERE email = '$mail'";//dit moet nog eens gebeuren, IK HEB GEEN IDEE WAAROM print_r($result); GEEFT HETZELFDE
-    $result = $conn->query($sql);
-    echo "update check: ";
-    print_r($result);
-    echo "<br>";
+    // $result = $conn->query($sql);
+    // echo "update check: ";
+    // print_r($result);
+    // echo "<br>";
     while($row = $result->fetch_assoc()) {
-      echo "hallo? <br>";
        $artist1 = $row["artist1"];
-       echo $row["artist1"];
        $songName1 = $row["songTitle1"];
        $artist2 = $row["artist2"];
        $songName2 = $row["songTitle2"];
@@ -104,7 +96,7 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
 
   if ($conn->query($sql) === TRUE) {
       $last_id = $conn->insert_id;
-      echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
+      // echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
   } else {
       echo "Error creating row: " . $conn->error;
   }
@@ -123,6 +115,7 @@ $conn->close();
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <title>Big Test Playlist</title>
   </head>
