@@ -19,15 +19,17 @@ $artist2 = $_POST['artist2'];
 $songName2 = $_POST['songName2'];
 $artist3 = $_POST['artist3'];
 $songName3 = $_POST['songName3'];
-$sql = "UPDATE $tableName
-SET username='$name',
-artist1='$artist1',
-songTitle1='$songName1',
-artist2='$artist2',
-songTitle2='$songName2',
-artist3='$artist3',
-songTitle3='$songName3'
-WHERE email='$mail'";
+$stmt = $conn->prepare("UPDATE $tableName
+SET username=?,
+artist1=?,
+songTitle1=?,
+artist2=?,
+songTitle2=?,
+artist3=?,
+songTitle3=?
+WHERE email=?");
+$stmt->bind_param("ssssssss", $name, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $mail);
+$stmt->execute();
 
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";

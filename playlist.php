@@ -49,14 +49,18 @@ echo "Connected successfully to database " . $dbname . "<br>";
 
 
 //check of email al bestaat
-$sql = "SELECT * FROM $tableName WHERE email = '$mail'";
-$result = $conn->query($sql);
+$stmt = $conn->prepare("SELECT * FROM $tableName WHERE email = ?");
+$stmt->bind_param("s", $mail);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // check of een ingevoerde email al in de database staat------------------------
 if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de data indien nodig
     // put the record in vars
-    $sql = "SELECT * FROM $tableName WHERE email = '$mail'";//dit moet nog eens gebeuren, IK HEB GEEN IDEE WAAROM print_r($result); GEEFT HETZELFDE
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM $tableName WHERE email = ?");
+    $stmt->bind_param("s", $mail);
+    $stmt->execute();
+    $result = $stmt->get_result();
     while($row = $result->fetch_assoc()) {
        $artist1 = $row["artist1"];
        $songName1 = $row["songTitle1"];
@@ -73,9 +77,10 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
   $artist3 = "";
   $songName3 = "";
   // Add row------------------------------------------------------------------
-  $sql = "INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3)
-  VALUES ('$name', '$mail', '$artist1', '$songName1', '$artist2', '$songName2', '$artist3', '$songName3')";
-
+  $stmt = $conn->prepare("INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("ssssssss", $name, $mail, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3);
+  $stmt->execute();
   if ($conn->query($sql) === TRUE) {
       $last_id = $conn->insert_id;
       echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
@@ -91,6 +96,7 @@ $data = htmlspecialchars($data);
 return $data;
 }
 
+$stmt->close();
 $conn->close();
 ?>
 
