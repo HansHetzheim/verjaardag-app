@@ -32,6 +32,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $tableName(
   songTitle2 VARCHAR(30),
   artist3 VARCHAR(30),
   songTitle3 VARCHAR(30),
+  message VARCHAR(255),
   reg_date TIMESTAMP)";
 if ($conn->query($sql) === TRUE) {
     echo "Table created successfully<br>";
@@ -67,6 +68,7 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
        $songName2 = $row["songTitle2"];
        $artist3 = $row["artist3"];
        $songName3 = $row["songTitle3"];
+       $message = $row["message"];
      }
  } else { //zo niet(er is een nieuw email in login.php gepost): initialiseer de data in mysql (maak een record)
   $artist1 = "";
@@ -75,12 +77,13 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
   $songName2 = "";
   $artist3 = "";
   $songName3 = "";
+  $message = "";
   // Add row------------------------------------------------------------------
-  $stmt = $conn->prepare("INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param("ssssssss", $name, $mail, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3);
+  $stmt = $conn->prepare("INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3, message)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssssssss", $name, $mail, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $message);
   $stmt->execute();
-  if ($conn->query($sql) === TRUE) {
+  if ($stmt->execute()) {
       $last_id = $conn->insert_id;
       echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
   } else {
@@ -129,6 +132,9 @@ $conn->close();
       <input type='text' name='artist3' id='artist3' maxlength="50"  value="<?php echo $artist3; ?>"/>
       <label for='songName' >Song Name (3)*:</label>
       <input type='text' name='songName3' id='songName3' maxlength="50"  value="<?php echo $songName3; ?>"/>
+
+      <label for='message' >Leave a personal message!*</label>
+      <textarea rows="5" cols="51" id="message" name="message" placeholder="Leave a message here!"><?php echo $message; ?></textarea>
 
       <input type='submit' name='Submit' value='Submit' />
 

@@ -18,6 +18,7 @@ $artist2 = $conn->real_escape_string($_POST['artist2']);
 $songName2 = $conn->real_escape_string($_POST['songName2']);
 $artist3 = $conn->real_escape_string($_POST['artist3']);
 $songName3 = $conn->real_escape_string($_POST['songName3']);
+$message = $conn->real_escape_string($_POST['message']);
 $stmt = $conn->prepare("UPDATE $tableName
 SET username=?,
 artist1=?,
@@ -25,9 +26,10 @@ songTitle1=?,
 artist2=?,
 songTitle2=?,
 artist3=?,
-songTitle3=?
+songTitle3=?,
+message=?
 WHERE email=?");
-$stmt->bind_param("ssssssss", $name, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $mail);
+$stmt->bind_param("sssssssss", $name, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $message, $mail);
 $stmt->execute();
 
 if ($conn->query($sql) === TRUE) {
