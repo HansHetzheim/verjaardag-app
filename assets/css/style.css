@@ -1,12 +1,16 @@
 body {
   margin: 0;
-  background: linear-gradient(black, #005F8B);
-  font-family: aleo;
+  padding: 0;
 }
 body .container {
+  height: 100vh;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto;
+  background: linear-gradient(black, #005F8B);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: aleo;
 }
 body .container h1 {
   font-size: 45px;
@@ -45,8 +49,8 @@ body .container .splitscreen .fields h3 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-body .container .splitscreen .fields .email,
-body .container .splitscreen .fields .name {
+body .container .splitscreen .fields #email,
+body .container .splitscreen .fields #name {
   width: 180px;
   height: 20px;
   color: #1e2166;
