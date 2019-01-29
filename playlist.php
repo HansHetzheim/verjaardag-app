@@ -1,10 +1,6 @@
 <?php
 include 'config.php';
 
-$name = $_POST['username'];
-$mail = $_POST['email'];
-echo "naam: ".$name."<br> mail: ".$mail."<br>";
-
 // Create connection------------------------------------------------------------
 $conn = new mysqli($servername, $username, $password);
 
@@ -13,6 +9,9 @@ if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
 echo "Connected successfully<br>";
+
+$name = $conn->real_escape_string($_POST['username']);
+$mail = $conn->real_escape_string($_POST['email']);
 
 // Create database if needed----------------------------------------------------
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
@@ -108,7 +107,7 @@ $conn->close();
   </head>
   <body>
 
-    <form id='register' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method='post' accept-charset='UTF-8'>
+    <form id='register' action='succes.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Your playlist</legend>
       <label for='username' >Your UserName*:</label>

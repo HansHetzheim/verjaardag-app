@@ -1,9 +1,6 @@
 <?php
 include 'config.php';
 
-$name = $_POST['username'];
-$mail = $_POST['email'];
-
 //Connect to relevant database--------------------------------------------------
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
@@ -11,14 +8,16 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully to database " . $dbname . "<br>";
 
+$name = $conn->real_escape_string($_POST['username']);
+$mail = $conn->real_escape_string($_POST['email']);
 
 //update record/row-----------------------------------------------------------
-$artist1 = $_POST['artist1'];
-$songName1 = $_POST['songName1'];
-$artist2 = $_POST['artist2'];
-$songName2 = $_POST['songName2'];
-$artist3 = $_POST['artist3'];
-$songName3 = $_POST['songName3'];
+$artist1 = $conn->real_escape_string($_POST['artist1']);
+$songName1 = $conn->real_escape_string($_POST['songName1']);
+$artist2 = $conn->real_escape_string($_POST['artist2']);
+$songName2 = $conn->real_escape_string($_POST['songName2']);
+$artist3 = $conn->real_escape_string($_POST['artist3']);
+$songName3 = $conn->real_escape_string($_POST['songName3']);
 $stmt = $conn->prepare("UPDATE $tableName
 SET username=?,
 artist1=?,
