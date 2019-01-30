@@ -1,10 +1,6 @@
 <?php
 if(isset($_POST['export'])){
-  $servername = "localhost";
-  $username = "veryCoolUser";
-  $password = "unGuessable1010";
-  $database = "dirkParty";
-  $tableName = "guestPlaylist";
+  include 'config.php';
   $conn = new mysqli($servername, $username, $password, $database);
   if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);

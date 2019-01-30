@@ -19,13 +19,13 @@
         <div class="photo">
           <img src="./img/dirk-nobg.png" alt="">
         </div>
-        <form method="POST" action="playlist.php" class="fields">
+        <form id='register' action='playlist.php' method='post' accept-charset='UTF-8' class="fields">
           <h3>Jouw Username: </h3>
           <input id="username" type="text" name="" value="<?php echo $name ?>" maxlength="50" placeholder="Jouw username hier..">
           <h3>Jouw Email Adres: </h3>
           <input id="email" type="text" name="" value="<?php echo $email ?>" maxlength="50" placeholder="Jouw email adres hier..">
           <div class="g-recaptcha" data-sitekey="6LdciY0UAAAAAJfp3TbaD4r-Ayurhnl8dc2dcgLz"></div>
-          <button class="continue" type="button" name="button">Aanmelden</button>
+          <input class="continue" type="submit" name="Submit" value="Aanmelden" />
         </form>
       </div>
     </div>
