@@ -7,7 +7,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection to database failed: " . $conn->connect_error);
 }
-echo "Connected successfully to database " . $dbname . "<br>";
+// echo "Connected successfully to database " . $dbname . "<br>";
 
 $name = $conn->real_escape_string($_SESSION['user']);
 $mail = $conn->real_escape_string($_SESSION['mailAddress']);
@@ -35,9 +35,9 @@ $stmt->execute();
 
 
 if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
+    // echo "Record updated successfully";
 } else {
-    echo "Error upadting record: " . $conn->error;
+    echo "Error updated record: " . $conn->error;
 }
 
 ?>
@@ -45,6 +45,7 @@ if ($conn->query($sql) === TRUE) {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="./assets/css/master.css">
     <link rel="stylesheet" href="assets/css/success.css">
     <meta charset="utf-8">
     <title>Big Test Playlist</title>

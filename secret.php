@@ -4,7 +4,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully<br>";
+// echo "Connected successfully<br>";
 
 $query = "SELECT * FROM $tableName ORDER BY id asc";
 $result = $conn->query($query);
@@ -20,6 +20,8 @@ print_r($result);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Aleo" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/mediaQuery.css">
+    <link rel="stylesheet" href="./assets/css/master.css">
     <link rel="stylesheet" href="assets/css/admin.css">
     <title>Admin Page</title>
   </head>
@@ -42,6 +44,7 @@ print_r($result);
           <th>Second Song</th>
           <th>Third artist</th>
           <th>Third Song</th>
+          <th>Message</th>
           <th>Registration time</th>
         </tr>
       </div>

@@ -1,0 +1,29 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(#005f8b, #000);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: aleo;
+}
+
+label,
+h1,
+h2,
+h3,
+p,
+legend {
+    background: linear-gradient(#b48811, #d9c387, #bb9b49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    height: 97vh;
+    width: 97vw;
+    overflow: hidden;
+}
