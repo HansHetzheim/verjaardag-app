@@ -17,17 +17,19 @@ print_r($result);
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="assets/css/style.css">
     <meta charset="utf-8">
-    <title>itsASecret</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Aleo" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <title>Admin Page</title>
   </head>
   <body>
     <div class="container">
       <div class="tablebox">
-      <h1>Input data for Dirk's Playlist</h1>
       <form class="secret" action="export.php" method="post">
-        <input class="export-btn" type="submit" name="export" value="export CSV">
-        <p>Press the EXPORT button to download an exel file with all of the data.</p>
+        <h1>Input data for Dirk's Playlist</h1>
+        <input class="export-btn" type="submit" name="export" value="Export">
+        <p><em>Press the EXPORT button to download an exel file with all of the data.</em></p>
       </form>
         <table>
         <tr>
