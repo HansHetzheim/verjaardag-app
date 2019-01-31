@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 
 //Connect to relevant database--------------------------------------------------
@@ -8,8 +9,8 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully to database " . $dbname . "<br>";
 
-$name = $conn->real_escape_string($_POST['username']);
-$mail = $conn->real_escape_string($_POST['email']);
+$name = $conn->real_escape_string($_SESSION['user']);
+$mail = $conn->real_escape_string($_SESSION['mailAddress']);
 
 //update record/row-----------------------------------------------------------
 $artist1 = $conn->real_escape_string($_POST['artist1']);
@@ -51,11 +52,11 @@ if ($conn->query($sql) === TRUE) {
     <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Bedankt voor de vette hits yo!</legend>
-      <p>de liedjes zijn opgeslagen inder je e-mail en naam: </p>
-      <label for='username' >Your UserName*:</label>
+      <p>de liedjes zijn opgeslagen inder je naam: <?php echo $name; ?></p>
+      <!-- <label for='username' >Your UserName*:</label>
       <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name; ?>" readonly="readonly"/>
       <label for='email' >Your Email Address*:</label>
-      <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" readonly="readonly"/>
+      <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" readonly="readonly"/> -->
 
       <input type='submit' name='Submit' value='Pas aan' />
       </fieldset>

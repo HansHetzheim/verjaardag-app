@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 
 // Create connection------------------------------------------------------------
@@ -10,8 +11,8 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully<br>";
 
-$name = $conn->real_escape_string($_POST['username']);
-$mail = $conn->real_escape_string($_POST['email']);
+$name = $conn->real_escape_string($_SESSION['user']);
+$mail = $conn->real_escape_string($_SESSION['mailAddress']);
 
 // Create database if needed----------------------------------------------------
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
@@ -113,11 +114,6 @@ $conn->close();
     <form id='register' action='succes.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Your playlist</legend>
-      <label for='username' >Your UserName*:</label>
-      <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name; ?>" readonly="readonly"/>
-      <label for='email' >Your Email Address*:</label>
-      <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" readonly="readonly"/>
-
       <label for='artist1' >Artist (1)*:</label>
       <input type='text' name='artist1' id='artist1' maxlength="50" value="<?php echo $artist1; ?>"/>
       <label for='songName1' >Song Name*:</label>
