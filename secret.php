@@ -28,26 +28,28 @@ print_r($result);
   <body>
     <div class="container">
       <div class="tablebox">
-      <form class="secret" action="export.php" method="post">
-        <h1>Input data for Dirk's Playlist</h1>
-        <input class="export-btn" type="submit" name="export" value="Export">
-        <p><em>Press the EXPORT button to download an exel file with all of the data.</em></p>
+      <h1>Input data for Dirk's Playlist</h1>
+      <form class="secret" action="/finalBirthdayApp/export.php" method="post">
+        <input class="export-btn" type="submit" name="export" value="export CSV">
+        <p>Press the EXPORT button to download an exel file with all of the data for the playlist or the messages from the guests.</p>
       </form>
-        <table>
-        <tr>
-          <th>Id</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>First artist</th>
-          <th>First Song</th>
-          <th>Second artist</th>
-          <th>Second Song</th>
-          <th>Third artist</th>
-          <th>Third Song</th>
-          <th>Message</th>
-          <th>Registration time</th>
-        </tr>
-      </div>
+      <form class="secret" action="/finalBirthdayApp/exportMessage.php" method="post">
+        <input class="export-btn" type="submit" name="exportMessage" value="export Message">
+      </form>
+      <table>
+       <tr>
+         <th>Id</th>
+         <th>Username</th>
+         <th>Email</th>
+         <th>First artist</th>
+         <th>First Song</th>
+         <th>Second artist</th>
+         <th>Second Song</th>
+         <th>Third artist</th>
+         <th>Third Song</th>
+         <th>Message</th>
+         <th>Registration time</th>
+       </tr>
        <?php
 
        while ($row = mysqli_fetch_array($result)){

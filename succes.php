@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['user'])) {
+   header('Location: http://localhost/finalBirthdayApp/login.php/');
+}
+
+if(isset($_POST['logOut'])){
+  unset($_SESSION['user']);
+  unset($_SESSION['mailAddress']);
+  session_destroy();
+  header('Location: http://localhost/finalBirthdayApp/login.php/');
+}
+
 include 'config.php';
 
 //Connect to relevant database--------------------------------------------------
@@ -65,6 +77,9 @@ if ($conn->query($sql) === TRUE) {
         </fieldset>
       </form>
     </div>
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      <input type='submit' name='logOut' value="Log out"/>
+    </form>
 
   </body>
 </html>

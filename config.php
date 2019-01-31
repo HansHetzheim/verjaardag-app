@@ -6,8 +6,8 @@ $username = "jessica";
 //Enter the username password:
 $password = "admin";
 //Enter the server database you're trying to connect to:
-$dbname = "birthdayplaylist";
+$dbname = "superTestDb";
 //Enter the name of the table you're using:
-$tableName = "guestPlaylist";
+$tableName = "superTestTable";
 
 ?>
