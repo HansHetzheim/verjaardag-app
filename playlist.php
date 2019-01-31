@@ -117,7 +117,7 @@ $conn->close();
         </div>
 
         <div class="fields">
-        <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
+        <form id='register' action='succes.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Jouw playlist</legend>
       <label for='username' >Jouw Username*:</label>
