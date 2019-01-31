@@ -14,6 +14,9 @@ if ($conn->connect_error) {
 }
 // echo "Connected successfully<br>";
 
+$name = $conn->real_escape_string($_POST['username']);
+$mail = $conn->real_escape_string($_POST['email']);
+
 // Create database if needed----------------------------------------------------
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 if ($conn->query($sql) === TRUE) {
@@ -40,6 +43,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $tableName(
   songTitle2 VARCHAR(30),
   artist3 VARCHAR(30),
   songTitle3 VARCHAR(30),
+  message VARCHAR(255),
   reg_date TIMESTAMP)";
 if ($conn->query($sql) === TRUE) {
     // echo "Table created successfully<br>";
@@ -48,14 +52,18 @@ if ($conn->query($sql) === TRUE) {
 }
 
 //check of email al bestaat
-$sql = "SELECT * FROM $tableName WHERE email = '$mail'";
-$result = $conn->query($sql);
+$stmt = $conn->prepare("SELECT * FROM $tableName WHERE email = ?");
+$stmt->bind_param("s", $mail);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // check of een ingevoerde email al in de database staat------------------------
 if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de data indien nodig
     // put the record in vars
-    $sql = "SELECT * FROM $tableName WHERE email = '$mail'";//dit moet nog eens gebeuren, IK HEB GEEN IDEE WAAROM print_r($result); GEEFT HETZELFDE
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM $tableName WHERE email = ?");
+    $stmt->bind_param("s", $mail);
+    $stmt->execute();
+    $result = $stmt->get_result();
     while($row = $result->fetch_assoc()) {
        $artist1 = $row["artist1"];
        $songName1 = $row["songTitle1"];
@@ -63,6 +71,7 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
        $songName2 = $row["songTitle2"];
        $artist3 = $row["artist3"];
        $songName3 = $row["songTitle3"];
+       $message = $row["message"];
      }
  } else { //zo niet(er is een nieuw email in login.php gepost): initialiseer de data in mysql (maak een record)
   $artist1 = "";
@@ -71,11 +80,13 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
   $songName2 = "";
   $artist3 = "";
   $songName3 = "";
+  $message = "";
   // Add row------------------------------------------------------------------
-  $sql = "INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3)
-  VALUES ('$name', '$mail', '$artist1', '$songName1', '$artist2', '$songName2', '$artist3', '$songName3')";
-
-  if ($conn->query($sql) === TRUE) {
+  $stmt = $conn->prepare("INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3, message)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssssssss", $name, $mail, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $message);
+  $stmt->execute();
+  if ($stmt->execute()) {
       $last_id = $conn->insert_id;
       echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
   } else {
@@ -90,6 +101,7 @@ $data = htmlspecialchars($data);
 return $data;
 }
 
+$stmt->close();
 $conn->close();
 ?>
 
@@ -135,6 +147,9 @@ $conn->close();
       <input type='text' name='artist3' id='artist3' maxlength="50"  value="<?php echo $artist3; ?>"/>
       <label for='songName' >Derde Liedje*:</label>
       <input type='text' name='songName3' id='songName3' maxlength="50"  value="<?php echo $songName3; ?>"/>
+
+      <label for='message' >Leave a personal message!*</label>
+      <textarea rows="5" cols="51" id="message" name="message" placeholder="Leave a message here!"><?php echo $message; ?></textarea>
 
       <input type='submit' name='Submit' value='Submit' />
 

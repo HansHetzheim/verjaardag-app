@@ -59,6 +59,7 @@ print_r($result);
            <td><?php echo $row['songTitle2']; ?></td>
            <td><?php echo $row['artist3']; ?></td>
            <td><?php echo $row['songTitle3']; ?></td>
+           <td><?php echo $row['message']; ?></td>
            <td><?php echo $row['reg_date']; ?></td>
          </tr>
          <?php
