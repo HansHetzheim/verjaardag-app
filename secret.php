@@ -25,9 +25,12 @@ print_r($result);
     <div class="container">
       <div class="tablebox">
       <h1>Input data for Dirk's Playlist</h1>
-      <form class="secret" action="export.php" method="post">
+      <form class="secret" action="/finalBirthdayApp/export.php" method="post">
         <input class="export-btn" type="submit" name="export" value="export CSV">
-        <p>Press the EXPORT button to download an exel file with all of the data.</p>
+        <p>Press the EXPORT button to download an exel file with all of the data for the playlist or the messages from the guests.</p>
+      </form>
+      <form class="secret" action="/finalBirthdayApp/exportMessage.php" method="post">
+        <input class="export-btn" type="submit" name="exportMessage" value="export Message">
       </form>
       <table>
        <tr>

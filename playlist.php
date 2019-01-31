@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include 'config.php';
 
 // Create connection------------------------------------------------------------
@@ -13,6 +14,12 @@ echo "Connected successfully<br>";
 
 $name = $conn->real_escape_string($_SESSION['user']);
 $mail = $conn->real_escape_string($_SESSION['mailAddress']);
+
+echo "LOOK HERE: ".$name;
+
+if(!isset($_SESSION['user'])) {
+   header('Location: http://localhost/finalBirthdayApp/login.php/');
+}
 
 // Create database if needed----------------------------------------------------
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
@@ -91,6 +98,13 @@ if ($result->num_rows > 0) { //zoja: laad de eerder ingegeven data of update de 
   }
 }
 
+if(isset($_POST['logOut'])){
+  unset($_SESSION['user']);
+  unset($_SESSION['mailAddress']);
+  session_destroy();
+  header('Location: http://localhost/finalBirthdayApp/login.php/');
+}
+
 function test_input($data) {
 $data = trim($data);
 $data = stripslashes($data);
@@ -121,7 +135,7 @@ $conn->close();
       </div>
 
         <div class="fields">
-        <form id='register' action='succes.php' method='post' accept-charset='UTF-8'>
+        <form id='register' action='/finalBirthdayApp/succes.php' method='post' accept-charset='UTF-8'>
       <fieldset >
       <legend>Jouw playlist</legend>
       <label for='artist1' >Artist (1)*:</label>
@@ -145,6 +159,10 @@ $conn->close();
       <input type='submit' name='Submit' value='Submit' />
 
       </fieldset>
+    </form>
+
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      <input type='submit' name='logOut' value="Log out"/>
     </form>
           </div>
         </div>
