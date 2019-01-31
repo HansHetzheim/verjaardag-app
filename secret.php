@@ -1,17 +1,15 @@
 <?php
 include 'config.php';
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
 echo "Connected successfully<br>";
 
 $query = "SELECT * FROM $tableName ORDER BY id asc";
-$result = $conn->query($query)
+$result = $conn->query($query);
 
-
-
-
+print_r($result);
 
 ?>
 
@@ -25,10 +23,13 @@ $result = $conn->query($query)
   </head>
   <body>
     <div class="container">
-      <form class="" action="export.php" method="post">
-        <input type="submit" name="export" value="export CSV">
+      <div class="tablebox">
+      <h1>Input data for Dirk's Playlist</h1>
+      <form class="secret" action="export.php" method="post">
+        <input class="export-btn" type="submit" name="export" value="export CSV">
+        <p>Press the EXPORT button to download an exel file with all of the data.</p>
       </form>
-      <table style="width:100%">
+      <table>
        <tr>
          <th>Id</th>
          <th>Username</th>

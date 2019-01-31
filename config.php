@@ -1,12 +1,12 @@
 <?php
 //Enter the server url you're trying to connect to:
-$servername = "localhost";
+$servername = "mariadb";
 //Enter the username to log into the server:
-$username = "veryCoolUser";
+$username = "user";
 //Enter the username password:
-$password = "unGuessable1010";
+$password = "password";
 //Enter the server database you're trying to connect to:
-$dbname = "dirkParty";
+$dbname = "birthdayplaylist";
 //Enter the name of the table you're using:
 $tableName = "guestPlaylist";
 

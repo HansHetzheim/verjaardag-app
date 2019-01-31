@@ -1,56 +1,60 @@
-<!-- <?php
-$name = $email = $nameErr = $emailErr = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["username"])) {
-    $nameErr = "Name is required";
-  } else {
-    $name = test_input($_POST["username"]);
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-      $nameErr = "Only letters and white space allowed";
+<?php
+  define('SITE_KEY', '6Lfr8o0UAAAAAGf7Rltt_C0alZ9DDfwB_qvRv5UV');
+  define('SECRET_KEY', '6Lfr8o0UAAAAANIPX9CvGeS9-G3sPnKQMVcPdyMa');
+
+  session_start();
+
+  if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $_SESSION['user']=$username;
+    $email = $_POST['email'];
+    $_SESSION['mailAddress']=$email;
+    $secretKey = "6Lfr8o0UAAAAANIPX9CvGeS9-G3sPnKQMVcPdyMa";
+    $responseKey = $_POST['g-recaptcha-response'];
+    $userIP = $_SERVER['REMOTE_ADDR'];
+
+    $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$responseKey&remoteip=$userIP";
+    $response = file_get_contents($url);
+    $response = json_decode($response);
+    
+    if ($response->success) {
+        if(!isset($username) || trim($username) == '' || !isset($email) || trim($email) == '') {
+            echo "You did not fill out the required fields.";
+        } else {header('Location: http://localhost/playlist.php/');}
+    } else  {
+        echo "Verification failed!";
     }
   }
-  if (empty($_POST["email"])) {
-      $emailErr = "Email is required";
-    } else {
-      $email = test_input($_POST["email"]);
-      // check if e-mail address is well-formed
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-      } else {
-        header( "Location: http://localhost/playlist.php" );
-      }
-    }
-}
-  function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?> -->
-
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Big Test Login</title>
-  </head>
-  <body>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
-      <fieldset >
-      <legend>Login</legend>
-      <label for='username' >Your UserName*:</label>
-      <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name ?>"/>
-      <label for='email' >Your Email Address*:</label>
-      <input type='email' name='email' id='email' maxlength="50" value="<?php echo $email ?>"/><span><?php echo $emailErr ?></span>
+</head>
 
-      <input type='submit' name='Submit' value='Submit' />
+<body>
 
-      </fieldset>
+    <form id='register' action='login.php' method='post' accept-charset='UTF-8'>
+        <fieldset>
+            <legend>Login</legend>
+            <label for='username'>Your UserName*:</label>
+            <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name ?>" />
+            <label for='email'>Your Email Address*:</label>
+            <input type='email' name='email' id='email' maxlength="50"
+                value="<?php echo $email ?>" /><span><?php echo $emailErr ?></span>
+
+            <input type='submit' name='submit' value='submit' />
+            <div class="g-recaptcha" data-sitekey="<?php echo SITE_KEY; ?>"></div>
+        </fieldset>
     </form>
 
-  </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
 </html>

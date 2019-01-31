@@ -22,6 +22,13 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating database: " . $conn->error;
 }
 
+//Connect to relevant database--------------------------------------------------
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+   die("Connection to database failed: " . $conn->connect_error);
+}
+echo "Connected successfully to database " . $dbname . "<br>";
+
 //Create table if needed--------------------------------------------------------
 $sql = "CREATE TABLE IF NOT EXISTS $tableName(
   id INTEGER(6) AUTO_INCREMENT PRIMARY KEY,
@@ -40,14 +47,6 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating table: " . $conn->error;
 }
-
-//Connect to relevant database--------------------------------------------------
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-   die("Connection to database failed: " . $conn->connect_error);
-}
-echo "Connected successfully to database " . $dbname . "<br>";
-
 
 //check of email al bestaat
 $stmt = $conn->prepare("SELECT * FROM $tableName WHERE email = ?");
@@ -103,17 +102,28 @@ $stmt->close();
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Big Test Playlist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Aleo" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Birthday Songs</title>
   </head>
   <body>
 
-    <form id='register' action='succes.php' method='post' accept-charset='UTF-8'>
+    <div class="container">
+      <div class="header">
+        <h1>Welkom!</h1>
+        <h2>Geef hieronder je drie favoriete nummers door</h2>
+      </div>
+
+        <div class="fields">
+        <form id='register' action='succes.php' method='post' accept-charset='UTF-8'>
       <fieldset >
-      <legend>Your playlist</legend>
+      <legend>Jouw playlist</legend>
       <label for='artist1' >Artist (1)*:</label>
       <input type='text' name='artist1' id='artist1' maxlength="50" value="<?php echo $artist1; ?>"/>
       <label for='songName1' >Song Name*:</label>
@@ -136,6 +146,10 @@ $conn->close();
 
       </fieldset>
     </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>
