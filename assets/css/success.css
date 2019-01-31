@@ -13,3 +13,27 @@ body {
     justify-content: center;
     text-align: center;
 }
+
+form {
+    width: 450px;
+    padding: 30px 30px 15px 30px;
+    height: 100vw;
+}
+
+p, legend {
+    background: linear-gradient(#b48811, #d9c387, #bb9b49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.edit-btn {
+    background-color: #1e2166;
+    color: white;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    z-index: 1;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}

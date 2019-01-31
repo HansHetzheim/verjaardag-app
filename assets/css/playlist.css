@@ -44,24 +44,9 @@ input {
     box-sizing: border-box;
 }
 
-label {
-    background: linear-gradient(#b48811, #d9c387, #bb9b49);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-h1 {
-    background: linear-gradient(#b48811, #d9c387, #bb9b49);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-h2 {
-    background: linear-gradient(#b48811, #d9c387, #bb9b49);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
+label,
+h1,
+h2,
 legend {
     background: linear-gradient(#b48811, #d9c387, #bb9b49);
     -webkit-background-clip: text;
