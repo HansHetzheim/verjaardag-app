@@ -1,13 +1,69 @@
-html, body{
-    padding:0;
-    margin:0;
+html,
+body {
+    padding: 0;
+    margin: 0;
+
+    /* Carbon Textured BG */
+    /* background:
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px; */
+
+    /* Blue to Black gradient BG */
     background: linear-gradient(#005f8b, #000);
+    background-color: #000;
     background-size: cover;
     background-repeat: no-repeat;
     font-family: aleo;
 }
 
 .container {
-    display: flex;
+    display: grid;
     justify-content: center;
+    text-align: center;
+}
+
+form {
+    width: 450px;
+    padding: 30px 30px 15px 30px;
+    height: 100vw;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+label {
+    background: linear-gradient(#b48811, #d9c387, #bb9b49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 {
+    background: linear-gradient(#b48811, #d9c387, #bb9b49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    background: linear-gradient(#b48811, #d9c387, #bb9b49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+legend {
+    background: linear-gradient(#b48811, #d9c387, #bb9b49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

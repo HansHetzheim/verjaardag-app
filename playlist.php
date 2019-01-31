@@ -3,7 +3,7 @@ include 'config.php';
 
 $name = $_POST['username'];
 $mail = $_POST['email'];
-echo "naam: ".$name."<br> mail: ".$mail."<br>";
+// echo "naam: ".$name."<br> mail: ".$mail."<br>";
 
 // Create connection------------------------------------------------------------
 $conn = new mysqli($servername, $username, $password);
@@ -12,12 +12,12 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully<br>";
+// echo "Connected successfully<br>";
 
 // Create database if needed----------------------------------------------------
 $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 if ($conn->query($sql) === TRUE) {
-    echo "Database created successfully<br>";
+    // echo "Database created successfully<br>";
 } else {
     echo "Error creating database: " . $conn->error;
 }
@@ -27,7 +27,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection to database failed: " . $conn->connect_error);
 }
-echo "Connected successfully to database " . $dbname . "<br>";
+// echo "Connected successfully to database " . $dbname . "<br>";
 
 //Create table if needed--------------------------------------------------------
 $sql = "CREATE TABLE IF NOT EXISTS $tableName(
@@ -42,7 +42,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $tableName(
   songTitle3 VARCHAR(30),
   reg_date TIMESTAMP)";
 if ($conn->query($sql) === TRUE) {
-    echo "Table created successfully<br>";
+    // echo "Table created successfully<br>";
 } else {
     echo "Error creating table: " . $conn->error;
 }
@@ -112,10 +112,6 @@ $conn->close();
       </div>
 
       <div class="splitscreen">
-        <div class="photo">
-          <img src="./img/dirk-nobg.png" alt="foto van dirk">
-        </div>
-
         <div class="fields">
         <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
       <fieldset >
@@ -125,19 +121,19 @@ $conn->close();
       <label for='email' >Jouw Email Adres*:</label>
       <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" readonly="readonly"/>
 
-      <label for='artist1' >Artist (1)*:</label>
+      <label for='artist1' >Artiest*:</label>
       <input type='text' name='artist1' id='artist1' maxlength="50" value="<?php echo $artist1; ?>"/>
-      <label for='songName1' >Song Name*:</label>
+      <label for='songName1' >Eerste Liedje*:</label>
       <input type='text' name='songName1' id='songName1' maxlength="50"  value="<?php echo $songName1; ?>"/>
 
-      <label for='artist2' >Artist (2)*:</label>
+      <label for='artist2' >Artiest*:</label>
       <input type='text' name='artist2' id='artist2' maxlength="50"  value="<?php echo $artist2; ?>"/>
-      <label for='songName2' >Song Name (2)*:</label>
+      <label for='songName2' >Tweede Liedje*:</label>
       <input type='text' name='songName2' id='songName2' maxlength="50"  value="<?php echo $songName2; ?>"/>
 
-      <label for='artist3' >Artist (3)*:</label>
+      <label for='artist3' >Artiest*:</label>
       <input type='text' name='artist3' id='artist3' maxlength="50"  value="<?php echo $artist3; ?>"/>
-      <label for='songName' >Song Name (3)*:</label>
+      <label for='songName' >Derde Liedje*:</label>
       <input type='text' name='songName3' id='songName3' maxlength="50"  value="<?php echo $songName3; ?>"/>
 
       <input type='submit' name='Submit' value='Submit' />

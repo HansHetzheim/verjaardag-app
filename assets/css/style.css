@@ -58,7 +58,8 @@ h3 {
   -webkit-text-fill-color: transparent;
 }
 
-#email, #name {
+#email,
+#name {
   width: 180px;
   height: 20px;
   color: #1e2166;
@@ -93,7 +94,7 @@ table {
   background-color: #005881;
 }
 
-.export-btn{
+.export-btn {
   display: flex;
   justify-content: center;
   background-color: #1e2166;
@@ -107,7 +108,7 @@ table {
   margin-right: auto;
 }
 
-p{
+p {
   text-align: center;
   color: #cecece;
 }
