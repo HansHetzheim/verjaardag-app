@@ -5,12 +5,15 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/playlist.css">
     <title>Big Test Login</title>
   </head>
   <body>
 
     <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
-      <fieldset >
+      <h1>WELKOM</h1>
+      <fieldset class="col-12" >
       <legend>Login</legend>
       <label for='username' >Your UserName*:</label>
       <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name ?>"/>
