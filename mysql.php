@@ -38,24 +38,4 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating table: " . $conn->error;
 }
-
-function initRow($name, $mail){
-  $artist1 = "";
-  $songName1 = "";
-  $artist2 = "";
-  $songName2 = "";
-  $artist3 = "";
-  $songName3 = "";
-  $message = "";
-  // Add row------------------------------------------------------------------
-  $stmt = $conn->prepare("INSERT INTO $tableName (username, email, artist1, songTitle1, artist2, songTitle2, artist3, songTitle3, message)
-   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param("sssssssss", $name, $mail, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $message);
-  if ($stmt->execute()) {
-     $last_id = $conn->insert_id;
-     //echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
-  } else {
-     echo "Error creating row: " . $conn->error;
-  }
-}
 ?>

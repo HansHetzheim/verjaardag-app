@@ -45,7 +45,7 @@
           <input type='text' name='songName3' id='songName3' maxlength="50" value="<?php echo $songName3; ?>" />
           </div>
           <div class="inputBox">
-          <label class="text" for='message'>Leave a personal message!*</label>
+          <label class="text" for='message'>Laat een persoonlijk bericht voor Dirk na!*</label>
           <textarea rows="5" cols="51" id="message" name="message" placeholder="Leave a message here!"><?php echo $message; ?></textarea>
           </div>
           <input type='submit' name='save' value='Save' />
