@@ -1,0 +1,147 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: aleo;
+}
+
+body{
+  background-color: #000;
+}
+
+.container{
+  height: 100vh;
+  display: grid;
+  grid-template: 100px auto / 1fr 80vw 1fr;
+  background: linear-gradient(#005f8b, #000);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header{
+  grid-area: 1 / 2 / span 1 / span 1;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.tablebox{
+  grid-area: 2 / 2 / span 1 / span 1;
+}
+.exportBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.secret input{
+  margin: 10px 20px;
+  width: 200px;
+  padding: 10px 0;
+}
+
+#register{
+  grid-area: 2 / 2 / span 1 / span 1;
+}
+
+#register input{
+  margin: 10px;
+  width: 50%;
+}
+
+#logout{
+  position: fixed;
+  bottom: 3px;
+  right: 3px;
+}
+
+#updatePlaylist{
+  grid-area: 2 / 2 / span 1 / span 1;
+  width: 100%;
+  display: flex;
+}
+#updatePlaylist input{
+  width:100%;
+}
+
+#confirm{
+  grid-area: 2 / 2 / span 1 / span 1;
+}
+
+.inputBox{
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.centered{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.g-recaptcha{
+  display: flex;
+  justify-content: center;
+}
+
+.text{
+  background: linear-gradient(#b48811, #d9c387, #bb9b49);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+input[name=login]{
+  width: 20%;
+  margin-bottom: 20px;
+}
+input[name=Submit]{
+  width: 80px;
+  margin: 20px;
+}
+input[name=logOut]{
+  width: 100%;
+  margin: 0;
+}
+input[name=save]{
+  padding: 10px 20px;
+}
+textarea{
+  padding: 5px;
+}
+input{
+  padding: 5px;
+}
+table{
+  display: none;
+}
+
+@media screen and (min-width: 992px) {
+  .bigForm{
+    width: 100%;
+    display: grid;
+    grid-template: repeat(3, 80px) 200px / 1fr 1fr;
+  }
+  #updatePlaylist input{
+    width:80%;
+  }
+  table{
+    display: block;
+    background-color: #fff;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+  th, td {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0;
+  }
+  tr:hover {
+    background-color: #d9d9d9;
+  }
+  tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+}
