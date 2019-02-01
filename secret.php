@@ -13,10 +13,11 @@ print_r($result);
 
 ?>
 
-
+<!-- Start of HTML -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Aleo" rel="stylesheet">
@@ -24,54 +25,80 @@ print_r($result);
     <link rel="stylesheet" href="./assets/css/master.css">
     <link rel="stylesheet" href="assets/css/admin.css">
     <title>Admin Page</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container">
-      <div class="tablebox">
-      <h1>Input data for Dirk's Playlist</h1>
-      <form class="secret" action="/finalBirthdayApp/export.php" method="post">
-        <input class="export-btn" type="submit" name="export" value="export CSV">
-        <p>Press the EXPORT button to download an exel file with all of the data for the playlist or the messages from the guests.</p>
-      </form>
-      <form class="secret" action="/finalBirthdayApp/exportMessage.php" method="post">
-        <input class="export-btn" type="submit" name="exportMessage" value="export Message">
-      </form>
-      <table>
-       <tr>
-         <th>Id</th>
-         <th>Username</th>
-         <th>Email</th>
-         <th>First artist</th>
-         <th>First Song</th>
-         <th>Second artist</th>
-         <th>Second Song</th>
-         <th>Third artist</th>
-         <th>Third Song</th>
-         <th>Message</th>
-         <th>Registration time</th>
-       </tr>
-       <?php
+        <div class="tablebox">
+            <h1>Input data for Dirk's Playlist</h1>
+            <form class="secret" action="/export.php" method="post">
+                <input class="export-btn" type="submit" name="export" value="export CSV">
+                <p>Press the EXPORT button to download an exel file with all of the data for the playlist or the
+                    messages from the guests.</p>
+            </form>
+            <form class="secret" action="/exportMessage.php" method="post">
+                <input class="export-btn" type="submit" name="exportMessage" value="export Message">
+            </form>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>First artist</th>
+                    <th>First Song</th>
+                    <th>Second artist</th>
+                    <th>Second Song</th>
+                    <th>Third artist</th>
+                    <th>Third Song</th>
+                    <th>Message</th>
+                    <th>Registration time</th>
+                </tr>
+                <?php
 
        while ($row = mysqli_fetch_array($result)){
          ?>
-         <tr>
-           <td><?php echo $row['id']; ?></td>
-           <td><?php echo $row['username']; ?></td>
-           <td><?php echo $row['email']; ?></td>
-           <td><?php echo $row['artist1']; ?></td>
-           <td><?php echo $row['songTitle1']; ?></td>
-           <td><?php echo $row['artist2']; ?></td>
-           <td><?php echo $row['songTitle2']; ?></td>
-           <td><?php echo $row['artist3']; ?></td>
-           <td><?php echo $row['songTitle3']; ?></td>
-           <td><?php echo $row['message']; ?></td>
-           <td><?php echo $row['reg_date']; ?></td>
-         </tr>
-         <?php
+                <tr>
+                    <td>
+                        <?php echo $row['id']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['username']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['email']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['artist1']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['songTitle1']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['artist2']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['songTitle2']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['artist3']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['songTitle3']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['message']; ?>
+                    </td>
+                    <td>
+                        <?php echo $row['reg_date']; ?>
+                    </td>
+                </tr>
+                <?php
        }
 
         ?>
-     </table>
-    </div>
-  </body>
+            </table>
+        </div>
+</body>
+
 </html>
+<!-- End of HTML -->

@@ -1,29 +1,23 @@
 <?php
 session_start();
-
 if(!isset($_SESSION['user'])) {
    header('Location: http://localhost/finalBirthdayApp/login.php/');
 }
-
 if(isset($_POST['logOut'])){
   unset($_SESSION['user']);
   unset($_SESSION['mailAddress']);
   session_destroy();
   header('Location: http://localhost/finalBirthdayApp/login.php/');
 }
-
 include 'config.php';
-
 //Connect to relevant database--------------------------------------------------
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection to database failed: " . $conn->connect_error);
 }
 // echo "Connected successfully to database " . $dbname . "<br>";
-
 $name = $conn->real_escape_string($_SESSION['user']);
 $mail = $conn->real_escape_string($_SESSION['mailAddress']);
-
 //update record/row-----------------------------------------------------------
 $artist1 = $conn->real_escape_string($_POST['artist1']);
 $songName1 = $conn->real_escape_string($_POST['songName1']);
@@ -44,42 +38,42 @@ message=?
 WHERE email=?");
 $stmt->bind_param("sssssssss", $name, $artist1, $songName1, $artist2, $songName2, $artist3, $songName3, $message, $mail);
 $stmt->execute();
-
-
 if ($conn->query($sql) === TRUE) {
     // echo "Record updated successfully";
 } else {
     echo "Error updated record: " . $conn->error;
 }
-
 ?>
 
+<!-- Start of HTML -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="./assets/css/master.css">
-    <link rel="stylesheet" href="assets/css/success.css">
-    <meta charset="utf-8">
-    <title>Big Test Playlist</title>
-  </head>
-  <body>
-    <div class="container">
-      <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
-        <fieldset >
-        <legend>Bedankt voor de vette hits yo!</legend>
-        <p>de liedjes zijn opgeslagen inder je naam: <?php echo $name; ?></p>
-        <!-- <label for='username' >Your UserName*:</label>
-        <input type='text' name='username' id='username' maxlength="50" value="<?php echo $name; ?>" readonly="readonly"/>
-        <label for='email' >Your Email Address*:</label>
-        <input type='text' name='email' id='email' maxlength="50" value="<?php echo $mail; ?>" readonly="readonly"/> -->
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Aleo" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/master.css">
+  <link rel="stylesheet" href="./assets/css/playlist.css">
+  <title>Je nummers zijn opgeslagen!</title>
+</head>
+
+<body>
+  <div class="container">
+    <form id='register' action='playlist.php' method='post' accept-charset='UTF-8'>
+      <fieldset>
+        <legend>Bedankt het delen van je favoriete nummers!</legend>
+        <p>Jouw liedjes zijn opgeslagen onder de naam:
+          <?php echo $name; ?>
+        </p>
         <input class="edit-btn" type='submit' name='Submit' value='Pas aan' />
-        </fieldset>
-      </form>
-    </div>
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-      <input type='submit' name='logOut' value="Log out"/>
+      </fieldset>
     </form>
+  </div>
+  <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+    <input type='submit' name='logOut' value="Log out" />
+  </form>
+</body>
 
-  </body>
 </html>
+<!-- End of HTML -->
