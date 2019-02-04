@@ -27,10 +27,10 @@ $result = $conn->query($query);
       <div class="tablebox">
         <div class="exportBox">
           <p class="text">Press the EXPORT button to download an exel file with all of the data for the playlist or the messages from the guests.</p>
-          <form class="secret" action="/finalBirthdayApp/export.php" method="post">
+          <form class="secret" action="../export.php" method="post">
             <input class="export-btn" type="submit" name="export" value="export playlist to CSV">
           </form>
-          <form class="secret" action="/finalBirthdayApp/exportMessage.php" method="post">
+          <form class="secret" action="../exportMessage.php" method="post">
             <input class="export-btn" type="submit" name="exportMessage" value="export Messages to CSV">
           </form>
         </div>
