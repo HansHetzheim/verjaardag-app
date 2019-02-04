@@ -5,7 +5,7 @@ session_start();
 
 //check if logged in------------------------------------------------------------
 if(!isset($_SESSION['user'])) {
-  //login attemt----------------------------------------------------------------
+  //login attempt----------------------------------------------------------------
   if (isset($_POST['login'])) {
     $name = $_POST['username'];
     $mail = $_POST['email'];
@@ -19,11 +19,13 @@ if(!isset($_SESSION['user'])) {
 
     if ($response->success) {
       if(!isset($name) || trim($name) == '' || !isset($mail) || trim($mail) == '') {
-        echo "You did not fill out the required fields.";
+        $logErr = "You did not fill out the required fields.";
+        include 'loginPage.php';
       } else {//user succesfully logged in--------------------------------------
         include 'mysql.php';
         $_SESSION['user']=$name;
         $_SESSION['mailAddress']=$mail;
+        $logErr = "";
         //check of email al bestaat
         $stmt = $conn->prepare("SELECT * FROM $tableName WHERE email = ?");
         $stmt->bind_param("s", $mail);
@@ -62,17 +64,24 @@ if(!isset($_SESSION['user'])) {
              $last_id = $conn->insert_id;
              //echo "Row created successfully<br>Last inserted ID is: " . $last_id . "<br>";
           } else {
-             echo "Error creating row: " . $conn->error;
+             //echo "Error creating row: " . $conn->error;
           }
         }
         include 'form.php';
       }
     } else  {
+      $logErr = "Verification failed!";
       include 'loginPage.php';
-      echo "Verification failed!";
     }
   } else {
     include 'loginPage.php';
+  }
+} elseif (isset($_POST['loginAdmin'])){
+  if ($_POST('password') == $adminPass){
+    include 'secret.php';
+  } else {
+    $passErr = "Incorrect password.";
+    include 'adminLogin.php';
   }
 } else{//logged in------------------------------------------------------------
   if(isset($_POST['logOut'])){//logout------------------------------------------
@@ -108,7 +117,7 @@ if(!isset($_SESSION['user'])) {
       if ($stmt->execute()) {
           // echo "Record updated successfully";
       } else {
-          echo "Error updated record: " . $conn->error;
+          // echo "Error updated record: " . $conn->error;
       }
       include 'save.php';
     } else {

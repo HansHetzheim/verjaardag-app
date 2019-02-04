@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName 'Restricted Area'
+AuthUserFile /var/www/html/single_page_app2/admin/.htpasswd
+require valid-user

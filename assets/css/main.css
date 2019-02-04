@@ -3,6 +3,7 @@
   padding: 0;
   font-family: aleo;
   box-sizing: border-box;
+  font-size: 18px;
 }
 
 body{
@@ -35,7 +36,6 @@ body{
   margin-bottom: 20px;
 }
 .secret input{
-  margin: 10px 20px;
   width: 200px;
   padding: 10px 0;
 }
@@ -44,16 +44,8 @@ body{
   grid-area: 2 / 2 / span 1 / span 1;
 }
 
-#register input{
-  margin: 10px;
-  width: 50%;
-}
-
 #logout{
   grid-area: 3 / 2 / span 1 / span 1;
-  margin: 20px;
-  display: flex;
-  justify-content: flex-end;
 }
 
 #updatePlaylist{
@@ -70,16 +62,26 @@ body{
 }
 
 .inputBox{
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-around;
+  margin: 10px 0;
+}
+
+.inputbox input{
+  width: 50%;
 }
 
 .centered{
   width: 100%;
   padding: 10px;
-  display: flex;
+  display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -91,19 +93,18 @@ body{
 }
 
 .text{
+  text-align: center;
   margin: 5px;
   background: linear-gradient(#b48811, #d9c387, #bb9b49);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-input[name=login]{
-  width: 20%;
-  margin-bottom: 20px;
+.error{
+  color: red;
 }
+
 input[name=Submit]{
-  width: 80px;
-  margin: 20px;
+  margin: 20px 0;
 }
 input[name=logOut]{
   height: 3em;
@@ -111,8 +112,7 @@ input[name=logOut]{
   margin: 0;
 }
 input[name=save]{
-  padding: 10px 20px;
-  margin: 10px;
+  padding: 10px 0;
 }
 textarea{
   padding: 5px;
@@ -139,7 +139,31 @@ table{
   .bigForm{
     width: 100%;
     display: grid;
-    grid-template: repeat(3, 80px) 200px / 1fr 1fr;
+    grid-template: repeat(3, 80px) auto / 1fr 1fr;
+  }
+  .box1{
+    grid-area: 1 / 1;
+  }
+  .box2{
+    grid-area: 1 / 2;
+  }
+  .box3{
+    grid-area: 2 / 1;
+  }
+  .box4{
+    grid-area: 2 / 2;
+  }
+  .box5{
+    grid-area: 3 / 1;
+  }
+  .box6{
+    grid-area: 3 / 2;
+  }
+  .box7{
+    grid-area: 4 / 1;
+  }
+  .box8{
+    grid-area: 4 / 2;
   }
   #updatePlaylist input{
     width:80%;

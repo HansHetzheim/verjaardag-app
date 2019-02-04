@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
@@ -17,7 +17,7 @@ $result = $conn->query($query);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Aleo" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
     <title>Admin Page</title>
   </head>
   <body>
@@ -28,10 +28,10 @@ $result = $conn->query($query);
         <div class="exportBox">
           <p class="text">Press the EXPORT button to download an exel file with all of the data for the playlist or the messages from the guests.</p>
           <form class="secret" action="/finalBirthdayApp/export.php" method="post">
-            <input class="export-btn" type="submit" name="export" value="export CSV">
+            <input class="export-btn" type="submit" name="export" value="export playlist to CSV">
           </form>
           <form class="secret" action="/finalBirthdayApp/exportMessage.php" method="post">
-            <input class="export-btn" type="submit" name="exportMessage" value="export Message">
+            <input class="export-btn" type="submit" name="exportMessage" value="export Messages to CSV">
           </form>
         </div>
         <table>
@@ -72,5 +72,8 @@ $result = $conn->query($query);
        </table>
       </div>
     </div>
+    <form id="logout" action="../<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      <input type='submit' name='logOut' value="Log out" />
+    </form>
   </body>
 </html>
