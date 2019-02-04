@@ -10,6 +10,10 @@ body{
   background-color: #000;
 }
 
+form{
+  margin: 1em 0;
+}
+
 .container{
   height: 100vh;
   display: grid;
@@ -138,6 +142,7 @@ table{
   }
   .bigForm{
     width: 100%;
+    height: 100%;
     display: grid;
     grid-template: repeat(3, 80px) auto / 1fr 1fr;
   }
